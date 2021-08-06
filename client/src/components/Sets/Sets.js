@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, Grid, CircularProgress, Typography, Button } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { deleteSet } from '../../actions/sets.js';
 import Set from './Set/Set';
 import useStyles from './styles';
-import { Switch, Route, useRouteMatch, Link, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, Link, BrowserRouter } from 'react-router-dom';
+import { getSets } from '../../actions/sets';
 
 const Sets = ({ setCurrentSetId }) => {
-    const sets = useSelector((state) => state.sets);
     //const { path, url } = useRouteMatch();
     const dispatch = useDispatch();
     const classes = useStyles();
 
+    useEffect(() => {
+        dispatch(getSets());
+      }, [dispatch]);
+
+    const sets = useSelector((state) => state.sets);
     console.log(sets);
         
     return (
@@ -27,9 +32,9 @@ const Sets = ({ setCurrentSetId }) => {
                     <Button size="small" color="secondary" onClick={() => dispatch(deleteSet(set._id))}>Delete</Button>
                 </Card>
                 <Switch>
-                        <Route exact path={`set/${set._id}`}>
-                            <Set set={set} setCurrentSetId={setCurrentSetId} />
-                        </Route>
+                        <Route exact path={`set/${set._id}`} render={() => (
+                            <Set set={set} />
+                        )} />
                 </Switch> 
             </Grid>
             ))}

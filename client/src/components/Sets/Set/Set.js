@@ -7,12 +7,9 @@ import CardForm from '../../CardForm/CardForm';
 import Flashcard from '../../Card/Card';
 
 import useStyles from './styles';
-import { useParams } from 'react-router-dom';
 
-const Set = () => {
-  const { setId } = useParams();
+const Set = ({set}) => { 
   
-  const set = useSelector((state) => (state.sets.find(set => set._id === setId)));
   console.log(set);
   
   const cards = set.cards;
@@ -20,15 +17,11 @@ const Set = () => {
   const [currentCardId, setCurrentCardId] = useState(0);
   const [openSetForm, setOpenSetForm] = useState(false);
   const [openCardForm, setOpenCardForm] = useState(false);
-
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCards());
   }, [currentCardId, dispatch]);
-
-
 
   return (
     <Container component="main">
@@ -40,7 +33,7 @@ const Set = () => {
         Add a card
       </Button>
       <CardForm set={set} cardId={0} setCardId={setCurrentCardId} open={openCardForm} setOpen={setOpenCardForm} />
-      <SetForm open={openSetForm} setOpen={setOpenSetForm} currentSetId={setId} />
+      <SetForm open={openSetForm} setOpen={setOpenSetForm} currentSetId={set._id} />
     <Paper>
     {!cards.length ? <CircularProgress /> : (
     <Grid className={classes.container} container alignItems="stretch" spacing={3}>
