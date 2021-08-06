@@ -11,7 +11,10 @@ import { useParams } from 'react-router-dom';
 
 const Set = () => {
   const { setId } = useParams();
-  const set = useSelector((state) => state.sets).find(set => set._id === setId);
+  
+  const set = useSelector((state) => (state.sets.find(set => set._id === setId)));
+  console.log(set);
+  
   const cards = set.cards;
   const classes = useStyles();
   const [currentCardId, setCurrentCardId] = useState(0);
@@ -36,14 +39,14 @@ const Set = () => {
       <Button variant="outlined" color="primary" onClick={() => setOpenCardForm(true)}>
         Add a card
       </Button>
-      <CardForm open={openCardForm} setOpen={setOpenCardForm} />
+      <CardForm set={set} cardId={0} setCardId={setCurrentCardId} open={openCardForm} setOpen={setOpenCardForm} />
       <SetForm open={openSetForm} setOpen={setOpenSetForm} currentSetId={setId} />
     <Paper>
     {!cards.length ? <CircularProgress /> : (
     <Grid className={classes.container} container alignItems="stretch" spacing={3}>
      {cards.map((card) => (
         <Grid key={card._id} item xs={12} sm={6} md={6}>
-            <Flashcard card={card} setCurrentId={setCurrentCardId} />
+            <Flashcard set={set} card={card} setCurrentId={setCurrentCardId} />
         </Grid>
       ))}
     </Grid>

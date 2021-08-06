@@ -27,11 +27,6 @@ export const updateSet = (id, set) => async (dispatch) => {
 
     dispatch({ type: UPDATE_SET, payload: data });
 
-    set.cards.map(async(card) => {
-        const { data } = await api.updateCard(card._id, { ...card, set: set.name });
-        
-        dispatch({ type: UPDATE_CARD, payload: data });
-    })
   } catch (error) {
     console.log(error);
   }
@@ -39,20 +34,9 @@ export const updateSet = (id, set) => async (dispatch) => {
 
 export const deleteSet = (id) => async (dispatch) => {
   try {
-    const { data } = await api.fetchSets();
-    const set = data.find(set => set._id === id);
-
-    set.cards.map(async(card) => {
-        await api.deleteCard(card._id);
-
-        dispatch({ type: DELETE_CARD, payload: card._id });
-    })
-
     await api.deleteSet(id);
-
     dispatch({ type: DELETE_SET, payload: id });
-
-    
+   
   } catch (error) {
     console.log(error);
   }

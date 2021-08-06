@@ -8,8 +8,9 @@ import moment from 'moment';
 import { deleteCard } from '../../actions/cards';
 import CardForm from '../CardForm/CardForm';
 import useStyles from './styles';
+import { updateSet } from '../../actions/sets';
 
-const Flashcard = ({ card, setCurrentId }) => {
+const Flashcard = ({ set, card, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -34,7 +35,7 @@ const Flashcard = ({ card, setCurrentId }) => {
         <Typography variant="body2" color="textSecondary" component="p">{card.ownSentence}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="secondary" onClick={() => dispatch(deleteCard(card._id))}>
+        <Button size="small" color="secondary" onClick={() => {dispatch(deleteCard(card._id)); dispatch(updateSet(set._id, {...set, cards: set.cards.filter(c => c._id === card._id)}))}}>
           <DeleteIcon fontSize="small" /> Delete
         </Button>
       </CardActions>

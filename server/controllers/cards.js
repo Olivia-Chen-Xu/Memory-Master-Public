@@ -22,7 +22,7 @@ export const createCard = async (req, res) => {
 
     try {
         await newCard.save();
-
+        console.log(newCard);
         res.status(201).json(newCard);
     } catch (error) {
         res.status(409).json({ message: error.message });
@@ -47,7 +47,7 @@ export const deleteCard = async (req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No card with id: ${id}`);
 
-    await Flashard.findByIdAndRemove(id);
+    await Flashcard.findByIdAndRemove(id);
 
     res.json({ message: "Card deleted successfully." });
 }
