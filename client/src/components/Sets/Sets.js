@@ -22,7 +22,6 @@ const Sets = ({ setCurrentSetId }) => {
         
     return (
         !sets.length ? <CircularProgress /> : (
-        <BrowserRouter>
         <Grid className={classes.container} container alignItems="stretch" spacing={3}>
             {sets.map((set) => (
             <Grid key={set._id} item xs={12} sm={6} md={6}>
@@ -32,14 +31,11 @@ const Sets = ({ setCurrentSetId }) => {
                     <Button size="small" color="secondary" onClick={() => dispatch(deleteSet(set._id))}>Delete</Button>
                 </Card>
                 <Switch>
-                        <Route exact path={`set/${set._id}`} render={() => (
-                            <Set set={set} />
-                        )} />
+                        <Route exact path={`set/${set._id}`} render={() => <Set set={set}/>}/>
                 </Switch> 
             </Grid>
             ))}
         </Grid>
-        </BrowserRouter>
         )
     );
     };
