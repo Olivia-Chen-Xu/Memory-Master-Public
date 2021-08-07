@@ -9,7 +9,6 @@ import { Switch, Route, Link, BrowserRouter } from 'react-router-dom';
 import { getSets } from '../../actions/sets';
 
 const Sets = ({ setCurrentSetId }) => {
-    //const { path, url } = useRouteMatch();
     const dispatch = useDispatch();
     const classes = useStyles();
 
@@ -30,9 +29,9 @@ const Sets = ({ setCurrentSetId }) => {
                     <Link to={`set/${set._id}`}>View and Edit</Link>
                     <Button size="small" color="secondary" onClick={() => dispatch(deleteSet(set._id))}>Delete</Button>
                 </Card>
-                <Switch>
-                        <Route exact path={`set/${set._id}`} render={() => <Set set={set}/>}/>
-                </Switch> 
+                {/* <Switch>
+                        <Route exact path={`set/${set._id}`} render={() => <Set />}/>
+                </Switch>  */}
             </Grid>
             ))}
         </Grid>

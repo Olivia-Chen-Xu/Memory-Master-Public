@@ -7,17 +7,27 @@ import CardForm from '../../CardForm/CardForm';
 import Flashcard from '../../Card/Card';
 
 import useStyles from './styles';
+import { useParams } from 'react-router-dom';
+import { getSets } from '../../../actions/sets';
 
-const Set = ({set}) => { 
+const Set = () => { 
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      dispatch(getSets());
+    }, [dispatch]);
   
-  console.log(set);
+  const sets = useSelector((state) => state.sets);
+  console.log(sets);
+  const { setId } = useParams();
+  const set = useSelector(state => state.sets.find(set => set._id === setId));
   
   const cards = set.cards;
   const classes = useStyles();
   const [currentCardId, setCurrentCardId] = useState(0);
   const [openSetForm, setOpenSetForm] = useState(false);
   const [openCardForm, setOpenCardForm] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCards());
