@@ -45,7 +45,7 @@ export const updateCard = async (req, res) => {
 export const deleteCard = async (req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No card with id: ${id}`);
-    console.log(id);
+    console.log(`${id} Deleted`);
     await Flashcard.findByIdAndRemove(id);
 
     res.json({ message: "Card deleted successfully." });
