@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography, Dialog, DialogContent, DialogActions } from '@material-ui/core';
+import { TextField, Button, Typography, Dialog, DialogContent, DialogActions, CircularProgress } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { createCard, updateCard } from '../../actions/cards';
@@ -8,7 +8,7 @@ import { updateSet } from '../../actions/sets';
 
 const CardForm = ({ set, cardId, setCardId, open, setOpen }) => {
   const [cardData, setCardData] = useState({ word: '', definition: '', context: '', ownSentence: '' });
-  const card = useSelector((state) => (cardId ? state.cards.find((message) => message._id === cardId) : null));
+  const card = cardId ? set?.find((message) => message._id === cardId) : null;
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -28,10 +28,8 @@ const CardForm = ({ set, cardId, setCardId, open, setOpen }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (cardId === 0) {
-      dispatch(createCard({ ...cardData, set: set.name }));
-      //console.log({ ...cardData, set: set.name });
-      dispatch(updateSet(set._id, {...set, cards: set.cards.concat({ ...cardData, set: set.name })}));
+    if (cardId === 0 ) {
+      dispatch(createCard({ ...cardData }, set));
       clear();
     } else {
       dispatch(updateCard(cardId, { ...cardData }));

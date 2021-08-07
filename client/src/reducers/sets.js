@@ -8,7 +8,7 @@ export default (sets = [], action) => {
     case CREATE_SET:
       return [...sets, action.payload];
     case UPDATE_SET:
-      return sets.map((set) => (set._id === action.payload._id ? action.payload : set));
+      return sets.map((set) => (set._id === action.payload.data._id ? action.payload.data : set));
     case DELETE_SET:
       return sets.filter((set) => set._id !== action.payload);
     default:

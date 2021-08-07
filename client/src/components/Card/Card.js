@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core/';
+import { Card, CardActions, CardContent, Button, Typography, CircularProgress } from '@material-ui/core/';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useDispatch } from 'react-redux';
@@ -17,7 +17,7 @@ const Flashcard = ({ set, card, setCurrentId }) => {
   const [openCardForm, setOpenCardForm] = useState(false);
 
 
-  return (
+  return (!set ? <CircularProgress /> : 
     <Card className={classes.flashcard}>
       <CardForm cardId={card._id} setCardId={setCurrentId} open={openCardForm} setOpen={setOpenCardForm} />
       <Typography variant="body2" color="textSecondary">{moment(card.createdAt).fromNow()}</Typography>
@@ -35,7 +35,7 @@ const Flashcard = ({ set, card, setCurrentId }) => {
         <Typography variant="body2" color="textSecondary" component="p">{card.ownSentence}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="secondary" onClick={() => {dispatch(deleteCard(card._id)); dispatch(updateSet(set._id, {...set, cards: set.cards.filter(c => c._id !== card._id)}))}}>
+        <Button size="small" color="secondary" onClick={() => {dispatch(deleteCard(card._id, set))}}>
           <DeleteIcon fontSize="small" /> Delete
         </Button>
       </CardActions>

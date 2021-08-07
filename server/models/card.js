@@ -6,14 +6,13 @@ export const cardSchema = mongoose.Schema({
     context: String,
     ownSentence: String,
     creator: String,
-    set: String,
     createdAt: {
         type: Date,
         default: new Date(),
     },
 })
 
-export var Flashcard = mongoose.model('Flashcard', cardSchema);
+export const Flashcard = mongoose.model('Flashcard', cardSchema);
 
 
 

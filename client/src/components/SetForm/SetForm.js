@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { createSet, updateSet } from '../../actions/sets';
 import useStyles from './styles';
-import { updateCard } from '../../actions/cards';
 
 const SetForm = ({ open, setOpen, currentSetId}) => {
   const [setData, setSetData] = useState({ name: '' });

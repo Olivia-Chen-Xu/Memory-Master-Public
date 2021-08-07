@@ -7,7 +7,7 @@ const setSchema = mongoose.Schema({
     cards: {
         type: [cardSchema],
         default: []
-    }, //error: `model` is not a valid type within the array
+    }, 
     createdAt: {
         type: Date,
         default: new Date()
