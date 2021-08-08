@@ -35,7 +35,7 @@ const Flashcard = ({ set, card, setCurrentId }) => {
         <Typography variant="body2" color="textSecondary" component="p">{card.ownSentence}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="secondary" onClick={() => {dispatch(deleteCard(card._id, set))}}>
+        <Button size="small" color="secondary" onClick={() => dispatch(deleteCard(card._id, set))}>
           <DeleteIcon fontSize="small" /> Delete
         </Button>
       </CardActions>

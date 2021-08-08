@@ -14,7 +14,7 @@ export const getCards = () => async (dispatch) => {
 export const createCard = (card, set) => async (dispatch) => {
   try {
     const { data } = await api.createCard(card);
-    dispatch({ type: CREATE_CARD, payload: await api.createCard(card) });
+    dispatch({ type: CREATE_CARD, payload: data }); 
     dispatch({ type: UPDATE_SET, payload: await api.updateSet(set._id, {...set, cards: set.cards.concat(data)}) })
 
   } catch (error) {
