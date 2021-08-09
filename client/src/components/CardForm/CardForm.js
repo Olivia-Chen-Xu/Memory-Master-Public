@@ -7,8 +7,9 @@ import useStyles from './styles';
 import { updateSet } from '../../actions/sets';
 
 const CardForm = ({ set, cardId, setCardId, open, setOpen }) => {
+  console.log(set);
   const [cardData, setCardData] = useState({ word: '', definition: '', context: '', ownSentence: '' });
-  const card = cardId ? set?.find((message) => message._id === cardId) : null;
+  const card = cardId ? set.cards.find((message) => message._id === cardId) : null;
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -17,7 +18,7 @@ const CardForm = ({ set, cardId, setCardId, open, setOpen }) => {
   }, [card]);
 
   const clear = () => {
-    //setCardId(0);
+    setCardId(0);
     setCardData({ word: '', definition: '', context: '', ownSentence: '' });
   };
 
@@ -42,13 +43,12 @@ const CardForm = ({ set, cardId, setCardId, open, setOpen }) => {
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
       <DialogContent>
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-        <Typography variant="h6">Creating a card</Typography> 
-        {/* {cardId ? `Editing "${card.word}"` : 'Creating a Flashcard'} */}
-        <TextField name="word" variant="outlined" label="Word" required fullWidth onChange={(e) => setCardData({ ...cardData, word: e.target.value })} />
-        <TextField name="definition" variant="outlined" label="Definition" required fullWidth multiline rows={4} value={cardData.definition} onChange={(e) => setCardData({ ...cardData, definition: e.target.value })} />
-        <TextField name="context" variant="outlined" label="Context" required fullWidth multiline rows={4} value={cardData.context} onChange={(e) => setCardData({ ...cardData, context: e.target.value })} />
-        <TextField name="ownSentence" variant="outlined" label="OwnSentence" required fullWidth multiline rows={4} value={cardData.ownSentence} onChange={(e) => setCardData({ ...cardData, ownSentence: e.target.value })} />
-        <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
+        <Typography variant="h6">{cardId ? `Editing "${card?.word}"` : 'Creating a Flashcard'}</Typography> 
+        <TextField name="word" variant="outlined" label="Word" required fullWidth value={cardData.word} onChange={(e) => setCardData({ ...cardData, word: e.target.value })} />
+        <TextField name="definition" variant="outlined" label="Definition" required fullWidth value={cardData.definition} multiline rows={4} value={cardData.definition} onChange={(e) => setCardData({ ...cardData, definition: e.target.value })} />
+        <TextField name="context" variant="outlined" label="Context" required fullWidth value={cardData.context} multiline rows={4} value={cardData.context} onChange={(e) => setCardData({ ...cardData, context: e.target.value })} />
+        <TextField name="ownSentence" variant="outlined" label="OwnSentence" required fullWidth value={cardData.ownSentence} multiline rows={4} value={cardData.ownSentence} onChange={(e) => setCardData({ ...cardData, ownSentence: e.target.value })} />
+        <Button onClick={handleClose} className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
         <DialogActions>
         <Button onClick={handleClose} variant="contained" color="primary" size="large" fullWidth>Cancel</Button>       
         </DialogActions>

@@ -17,13 +17,10 @@ const Set = () => {
   useEffect(() => {
       dispatch(getSets());
     }, [dispatch]);
-  
-  const sets = useSelector((state) => state.sets);
-  console.log(sets);
+    
   const { setId } = useParams();
   const set = useSelector(state => state.sets.find(set => set._id === setId));
-  
-  //const cards = set.cards;
+  console.log(set);
   const classes = useStyles();
   const [currentCardId, setCurrentCardId] = useState(0);
   const [openSetForm, setOpenSetForm] = useState(false);
@@ -42,7 +39,7 @@ const Set = () => {
       <Button variant="outlined" color="primary" onClick={() => setOpenCardForm(true)}>
         Add a card
       </Button>
-      <CardForm set={set} cardId={0} setCardId={setCurrentCardId} open={openCardForm} setOpen={setOpenCardForm} />
+      <CardForm set={set} cardId={currentCardId} setCardId={setCurrentCardId} open={openCardForm} setOpen={setOpenCardForm} />
       <SetForm open={openSetForm} setOpen={setOpenSetForm} currentSetId={set._id} />
     <Paper>
     {!set.cards.length ? 
