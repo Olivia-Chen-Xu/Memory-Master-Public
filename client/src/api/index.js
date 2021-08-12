@@ -12,7 +12,7 @@ API.interceptors.request.use((req) => {
 
 export const fetchCards = () => API.get('/cards');
 export const createCard = (newCard) => API.post('/cards', newCard);
-export const updateCard = (id, updatedCard) => API.patch(`/cards/${id}`, updatedCard);
+export const updateCard = (updatedCard) => API.patch(`/cards/${updatedCard._id}`, updatedCard);
 export const deleteCard = (id) => API.delete(`/cards/${id}`);
 
 export const fetchSets = () => API.get('/sets');

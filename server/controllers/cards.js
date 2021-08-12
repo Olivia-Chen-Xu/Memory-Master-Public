@@ -22,7 +22,7 @@ export const createCard = async (req, res) => {
 
     try {
         await newCard.save();
-        console.log(newCard);
+        console.log("create", newCard);
         res.status(201).json(newCard);
     } catch (error) {
         res.status(409).json({ message: error.message });
@@ -31,12 +31,12 @@ export const createCard = async (req, res) => {
 
 export const updateCard = async (req, res) => {
     const { id } = req.params;
-    const {word, definition, context, ownSentence, creator} = req.body;
+    const {word, definition, context, ownSentence, creator, timesStudied} = req.body;
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No card with id: ${id}`);
 
-    const updatedCard = {word, definition, context, ownSentence, creator, _id: id };
-
+    const updatedCard = {word, definition, context, ownSentence, creator, timesStudied,  _id: id };
+    console.log("update", updatedCard); 
     await Flashcard.findByIdAndUpdate(id, updatedCard, { new: true });
 
     res.json(updatedCard);

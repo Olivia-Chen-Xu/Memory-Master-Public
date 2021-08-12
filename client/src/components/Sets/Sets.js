@@ -28,6 +28,7 @@ const Sets = ({ setCurrentSetId }) => {
                     <Typography variant="h6">{set.name}</Typography>
                     <Link to={`set/${set._id}`}>View and Edit</Link>
                     <Button size="small" color="secondary" onClick={() => dispatch(deleteSet(set._id))}>Delete</Button>
+                    <Link to={`studying/set/${set._id}`}> Study this set</Link>
                 </Card>
                 {/* <Switch>
                         <Route exact path={`set/${set._id}`} render={() => <Set />}/>

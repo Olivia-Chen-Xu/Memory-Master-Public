@@ -10,7 +10,7 @@ import CardForm from '../CardForm/CardForm';
 import useStyles from './styles';
 import { updateSet } from '../../actions/sets';
 
-const Flashcard = ({ set, card, setCurrentId }) => {
+const Flashcard = ({ set, card }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -19,11 +19,11 @@ const Flashcard = ({ set, card, setCurrentId }) => {
 
   return (!set ? <CircularProgress /> : 
     <Card className={classes.flashcard}>
-      <CardForm cardId={card._id} setCardId={setCurrentId} open={openCardForm} setOpen={setOpenCardForm} />
+      <CardForm set={set} cardId={card._id} open={openCardForm} setOpen={setOpenCardForm} />
       <Typography variant="body2" color="textSecondary">{moment(card.createdAt).fromNow()}</Typography>
       {(user?.result?.googleId === card?.creator || user?.result?._id === card?.creator) && (
       <div className={classes.overlay2}>
-        <Button onClick={() => {setOpenCardForm(true); setCurrentId(card._id)}} style={{ color: 'grey' }} size="small">
+        <Button onClick={() => {setOpenCardForm(true)}} style={{ color: 'grey' }} size="small">
           <MoreHorizIcon fontSize="medium" />
         </Button>
       </div>

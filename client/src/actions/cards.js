@@ -22,11 +22,13 @@ export const createCard = (card, set) => async (dispatch) => {
   }
 };
 
-export const updateCard = (id, card) => async (dispatch) => {
+export const updateCard = (card, set) => async (dispatch) => {
   try {
-    const { data } = await api.updateCard(id, card);
+    const { data } = await api.updateCard(card);
 
     dispatch({ type: UPDATE_CARD, payload: data });
+
+    dispatch({ type: UPDATE_SET, payload: await api.updateSet(set._id, {...set, cards: set.cards.map(c => c._id === card._id ? card : c)})});
   } catch (error) {
     console.log(error);
   }

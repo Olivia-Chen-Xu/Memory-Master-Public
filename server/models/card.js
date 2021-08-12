@@ -10,6 +10,10 @@ export const cardSchema = mongoose.Schema({
         type: Date,
         default: new Date(),
     },
+    timesStudied: {
+        type: Number,
+        default: 0,
+    }
 })
 
 export const Flashcard = mongoose.model('Flashcard', cardSchema);

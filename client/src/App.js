@@ -8,6 +8,7 @@ import Auth from './components/Auth/Auth';
 import Dashboard from './components/Dashboard/Dashboard';
 import Sets from './components/Sets/Sets';
 import Set from './components/Sets/Set/Set';
+import StudyingSet from './components/StudyingSet/StudyingSet';
 
 const App = () => (
   <BrowserRouter>
@@ -19,6 +20,7 @@ const App = () => (
         <Route path="/auth" exact component={Auth} />
         <Route path="/sets" exact component={Sets} />
         <Route path="/set/:setId" exact component={Set} />
+        <Route path="/studying/set/:setId" exact component={StudyingSet} />
       </Switch>
     </Container>
   </BrowserRouter>
