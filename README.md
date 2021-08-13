@@ -1,4 +1,4 @@
-# Memory Master
+# Memory Master :100: :100: 	:nerd_face: 	:nerd_face:
 
 A fullstack flashcard web app that uses spaced-repetition to help users with memorization.
 
